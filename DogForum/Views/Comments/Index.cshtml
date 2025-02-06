@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DogForum.Models.Comments>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discussions)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discussions.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CommentsId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CommentsId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CommentsId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

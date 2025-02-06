@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DogForum.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DogForumContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DogForumContext") ?? throw new InvalidOperationException("Connection string 'DogForumContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

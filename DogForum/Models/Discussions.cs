@@ -11,9 +11,9 @@ namespace DogForum.Models
 
         public string Content { get; set; } = string.Empty;
 
-        string ImageFilename { get; set; } = string.Empty;
+        public string ImageFilename { get; set; } = string.Empty;
 
-        DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
         public List<Comments>? Comments { get; set; }
     }
