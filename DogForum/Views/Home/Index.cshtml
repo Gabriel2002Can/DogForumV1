@@ -1,8 +1,19 @@
-﻿@{
+﻿@model IEnumerable<DogForum.Models.Discussions>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid" style="margin-top:8vh">
+<div class="col">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-8 mb-3">
+            <div class="card text-bg-light">
+                <p class="title">@item.Title</p> 
+            </div>
+
+        </div>
+    }
+</div>
 </div>

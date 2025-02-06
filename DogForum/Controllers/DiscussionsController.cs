@@ -22,7 +22,7 @@ namespace DogForum.Controllers
         // GET: Discussions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Discussions.ToListAsync());
+            return View(await _context.Discussions.Include("Comments").ToListAsync());
         }
 
         // GET: Discussions/Details/5
