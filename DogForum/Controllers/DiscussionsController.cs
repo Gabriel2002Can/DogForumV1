@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DogForum.Data;
 using DogForum.Models;
+using System.Xml.Linq;
 
 namespace DogForum.Controllers
 {
@@ -56,11 +57,25 @@ namespace DogForum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DiscussionsId,Title,Content")] Discussions discussions)
         {
+
+            discussions.CreateDate = DateTime.Now;
+
+            discussions.ImageFilename = Guid.NewGuid().ToString() + Path.GetExtension(discussions.ImageFile?.FileName);
+
+            if(discussions.ImageFile != null)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", discussions.ImageFilename);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await discussions.ImageFile.CopyToAsync(fileStream);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(discussions);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("DiscussionsDetails", "Home", new { id = discussions.DiscussionsId });
             }
             return View(discussions);
         }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DogForum.Models.Discussions>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Discussion Details";
 }
 
 <div class="container-fluid" style="margin-top:8vh">
@@ -10,7 +10,7 @@
     {
         <div class="col-md-6 col-lg-8 mb-3">
             <div class="card text-bg-light">
-                <p class="title">@item.Title</p> 
+                    <a href="@Url.Action("DiscussionsDetails", "Home", new { id = item.DiscussionsId })"><p class="title">@item.Title</p> </a>
             </div>
 
         </div>

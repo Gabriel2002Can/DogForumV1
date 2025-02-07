@@ -1,8 +1,4 @@
-﻿@model DogForum.Models.Comments
-
-@{
-    ViewData["Title"] = "Create";
-}
+﻿@model DogForum.Models.Discussions
 
 <h1>Create</h1>
 
@@ -18,10 +14,10 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="hidden" value="@ViewBag.DiscussionsId" name="DiscussionsId" />
+                <input type="hidden" asp-for="DiscussionsId" value="@ViewBag.DiscussionsId">
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="CreateComment" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -32,5 +28,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

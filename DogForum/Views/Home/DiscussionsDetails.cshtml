@@ -1,0 +1,45 @@
+﻿@model DogForum.Models.Discussions
+
+@{
+    // code block
+    ViewData["Title"] = "Discussion Details";
+}
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <hr />
+    <div>
+        <img src="@Url.Content("/images/" + Model.ImageFilename)" alt="@Model.Title" class="rounded mx-auto d-block" />
+    </div>
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+    </dl>
+    <div>
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="card">
+                <div class="card-body">
+                    @comment.Content
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    <a asp-controller="Comments" asp-action ="Create" asp-route-id="@Model?.DiscussionsId">Comment</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

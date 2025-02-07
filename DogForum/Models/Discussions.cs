@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DogForum.Models
 {
@@ -16,5 +18,9 @@ namespace DogForum.Models
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         public List<Comments>? Comments { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Image")]
+        public IFormFile? ImageFile { get; set; }
     }
 }

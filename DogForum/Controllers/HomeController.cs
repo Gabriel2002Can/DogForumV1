@@ -3,6 +3,7 @@ using DogForum.Models;
 using Microsoft.AspNetCore.Mvc;
 using DogForum.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DogForum.Controllers
 {
@@ -21,6 +22,31 @@ namespace DogForum.Controllers
 
             var discussions = await _context.Discussions.Include(m => m.Comments).ToListAsync();
             return View(discussions);
+        }
+
+        public async Task<IActionResult> DiscussionsDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // get discussions by id
+            var discussions = await _context.Discussions.Include(m => m.Comments).FirstOrDefaultAsync(m => m.DiscussionsId == id);
+
+            if (discussions == null)
+            {
+                return NotFound();
+            }
+
+            return View(discussions);
+        }
+
+        public IActionResult CommentsPost(int? id)
+        {
+           
+            ViewBag.DiscussionsId = id;
+            return View();
         }
 
         public IActionResult Privacy()

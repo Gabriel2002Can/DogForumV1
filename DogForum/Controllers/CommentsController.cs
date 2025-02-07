@@ -27,9 +27,15 @@ namespace DogForum.Controllers
         }
 
         // GET: Comments/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["DiscussionsId"] = new SelectList(_context.Discussions, "DiscussionsId", "Title");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["DiscussionsId"] = id;
+
             return View();
         }
 
@@ -44,7 +50,7 @@ namespace DogForum.Controllers
             {
                 _context.Add(comments);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("DiscussionsDetails", "Home", new { id = comments.DiscussionsId });
             }
             ViewData["DiscussionsId"] = new SelectList(_context.Discussions, "DiscussionsId", "Title", comments.DiscussionsId);
             return View(comments);
