@@ -12,16 +12,18 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+
+            <div class="form-group form-outline" data-mdb-input-init>
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <textarea asp-for="Content" class="form-control" rows="8"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="hidden" value="@ViewBag.DiscussionsId" name="DiscussionsId" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" style="margin-top:3vh"/>
             </div>
         </form>
     </div>
