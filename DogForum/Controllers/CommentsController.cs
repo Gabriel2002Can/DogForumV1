@@ -55,10 +55,5 @@ namespace DogForum.Controllers
             ViewData["DiscussionsId"] = new SelectList(_context.Discussions, "DiscussionsId", "Title", comments.DiscussionsId);
             return View(comments);
         }
-
-        private bool CommentsExists(int id)
-        {
-            return _context.Comments.Any(e => e.CommentsId == id);
-        }
     }
 }
