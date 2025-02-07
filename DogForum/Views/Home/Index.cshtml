@@ -1,19 +1,43 @@
 ﻿@model IEnumerable<DogForum.Models.Discussions>
 
 @{
-    ViewData["Title"] = "Discussion Details";
+    ViewData["Title"] = "Discussions";
 }
 
-<div class="container-fluid" style="margin-top:8vh">
-<div class="col">
+<div class="container mt-4">
+    <h2 class="mb-4">Latest Discussions</h2>
+
     @foreach (var item in Model)
     {
-        <div class="col-md-6 col-lg-8 mb-3">
-            <div class="card text-bg-light">
-                    <a href="@Url.Action("DiscussionsDetails", "Home", new { id = item.DiscussionsId })"><p class="title">@item.Title</p> </a>
-            </div>
+        <div class="card mb-3 shadow-sm">
+            <div class="row g-0">
+                @if (!string.IsNullOrEmpty(item.ImageFilename))
+                {
+                    <div class="col-md-4">
+                        <img src="~/images/@item.ImageFilename" class="img-fluid rounded-start" alt="@item.Title">
+                    </div>
+                }
 
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="@Url.Action("DiscussionsDetails", "Home", new { id = item.DiscussionsId })" class="text-decoration-none text-dark">
+                                @item.Title
+                            </a>
+                        </h5>
+
+                        <p class="card-text"><small class="text-body-secondary">Posted on @item.CreateDate.ToShortDateString()</small></p>
+
+						@if (item.Comments != null){
+                            <span style="float: right" class="text-body-secondary">@item.Comments.Count() Comments</span>
+                        }
+                        else{
+                            <span class="text-body-secondary">0 comments</span>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
         </div>
     }
-</div>
 </div>

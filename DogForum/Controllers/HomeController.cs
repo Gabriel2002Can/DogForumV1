@@ -20,7 +20,7 @@ namespace DogForum.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var discussions = await _context.Discussions.Include(m => m.Comments).ToListAsync();
+            var discussions = await _context.Discussions.Include(d => d.Comments).OrderByDescending(d => d.CreateDate).ToListAsync();
             return View(discussions);
         }
 
@@ -32,7 +32,7 @@ namespace DogForum.Controllers
             }
 
             // get discussions by id
-            var discussions = await _context.Discussions.Include(m => m.Comments).FirstOrDefaultAsync(m => m.DiscussionsId == id);
+            var discussions = await _context.Discussions.Include(m => m.Comments.OrderByDescending(d => d.CreateDate)).FirstOrDefaultAsync(m => m.DiscussionsId == id);
 
             if (discussions == null)
             {

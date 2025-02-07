@@ -5,41 +5,45 @@
     ViewData["Title"] = "Discussion Details";
 }
 
-<div>
+<div style="margin-top: 5vh">
     <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <div>
-        <img src="@Url.Content("/images/" + Model.ImageFilename)" alt="@Model.Title" class="rounded mx-auto d-block" />
+        <img class="rounded mx-auto d-block" src="@Url.Content("/images/" + Model.ImageFilename)" alt="@Model.Title" />
     </div>
-    <dl class="row">
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class="col-sm-10">
+    <dl class="row" style="margin-top: 5vh">
+        <div class="col-sm-10">
+        <span>
             @Html.DisplayFor(model => model.Content)
-        </dd>
+        </span>
         
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-        <dd class="col-sm-10">
+        <span style="float: right">
             @Html.DisplayFor(model => model.CreateDate)
-        </dd>
+        </span>
+        </div>
     </dl>
-    <div>
+
+    <div style="margin-top: 6vh">
+        <a asp-controller="Comments" asp-action="Create" asp-route-id="@Model?.DiscussionsId">
+            <button type="button" class="btn btn-primary">Comment</button>
+        </a>
+    </div>
+
+    <div style="margin-top: 3vh; margin-bottom: 10vh">
         @foreach (var comment in Model.Comments)
         {
-            <div class="card">
+
+            <div class="card mb-3 shadow-sm">
+                    <div class="col">
                 <div class="card-body">
-                    @comment.Content
+                        <p>@comment.Content</p>
                 </div>
+            </div>
             </div>
         }
     </div>
 </div>
-<div>
-    <a asp-controller="Comments" asp-action ="Create" asp-route-id="@Model?.DiscussionsId">Comment</a> |
-    <a asp-action="Index">Back to List</a>
+<div> 
+    <a asp-action="Index">Home Page</a>
 </div>
 

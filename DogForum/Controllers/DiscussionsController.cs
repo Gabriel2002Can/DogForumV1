@@ -55,16 +55,18 @@ namespace DogForum.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DiscussionsId,Title,Content")] Discussions discussions)
+        public async Task<IActionResult> Create([Bind("DiscussionsId,Title,Content,ImageFile")] Discussions discussions)
         {
 
             discussions.CreateDate = DateTime.Now;
 
-            discussions.ImageFilename = Guid.NewGuid().ToString() + Path.GetExtension(discussions.ImageFile?.FileName);
-
-            if(discussions.ImageFile != null)
+            if (discussions.ImageFile != null)
             {
-                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", discussions.ImageFilename);
+
+                discussions.ImageFilename = Guid.NewGuid().ToString() + Path.GetExtension(discussions.ImageFile?.FileName);
+
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", discussions.ImageFilename);
+
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await discussions.ImageFile.CopyToAsync(fileStream);
