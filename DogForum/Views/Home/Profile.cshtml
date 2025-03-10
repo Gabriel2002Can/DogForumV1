@@ -1,0 +1,48 @@
+﻿@model ProfileViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container mt-4">
+    <h2>@Model.User.Name's Profile</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+             
+                <div class="me-3">
+                    <img src="~/profile_pictures/@(Model.User.ImageFilename ?? "default.png")"
+                         class="img-fluid rounded-circle"
+                         alt="Profile Image"
+                         style="width: 150px; height: 150px;">
+                </div>
+
+               
+                <div>
+                    <h3 class="mb-1">@Model.User.Name</h3>
+                    <p class="text-muted mb-0">@Model.User.location</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Discussions</h3>
+    @if (Model.Discussions.Any())
+    {
+        <ul class="list-group">
+            @foreach (var discussion in Model.Discussions)
+            {
+                <li class="list-group-item">
+                    <a href="@Url.Action("DiscussionsDetails", "Home", new { id = discussion.DiscussionsId })">
+                        @discussion.Title
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>This user has not created any discussions yet.</p>
+    }
+</div>

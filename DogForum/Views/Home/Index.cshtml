@@ -14,27 +14,48 @@
                 @if (!string.IsNullOrEmpty(item.ImageFilename))
                 {
                     <div class="col-md-4">
+                        <a href="@Url.Action("DiscussionsDetails", "Home", new { id = item.DiscussionsId })" class="text-decoration-none text-dark">
+
                         <img src="~/images/@item.ImageFilename" class="img-fluid rounded-start" alt="@item.Title">
+
+                        </a>
                     </div>
                 }
 
                 <div class="col">
+
                     <div class="card-body">
+
+                        <p class="card-text">
+
+                            <a class="no-link-style" asp-controller="Home" asp-action="Profile" asp-route-id="@item.User.Id">
+                                <img src="~/profile_pictures/@(item.User?.ImageFilename ?? "default.png")" class="rounded-circle" width="40" height="40" alt="User Image">
+                            </a>
+
+                            <small class="text-body-secondary">
+                                <a class="no-link-style" asp-controller="Home" asp-action="Profile" asp-route-id="@item.User.Id">
+                                    <strong>@(item.User?.Name ?? "Unknown User")</strong>
+                                </a>
+                            </small>
+
+                        </p>
+
                         <h5 class="card-title">
                             <a href="@Url.Action("DiscussionsDetails", "Home", new { id = item.DiscussionsId })" class="text-decoration-none text-dark">
                                 @item.Title
                             </a>
                         </h5>
 
-                        <p class="card-text"><small class="text-body-secondary">Posted on @item.CreateDate.ToShortDateString()</small></p>
+                        <span style="float: left" class="card-text"><small class="text-body-secondary">Posted on @item.CreateDate.ToShortDateString()</small></span>
 
-						@if (item.Comments != null){
+                        @if (item.Comments != null)
+                        {
                             <span style="float: right" class="text-body-secondary">@item.Comments.Count() Comments</span>
                         }
-                        else{
+                        else
+                        {
                             <span class="text-body-secondary">0 comments</span>
                         }
-                        
                     </div>
                 </div>
             </div>

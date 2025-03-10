@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DogForum</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - Dog Forum</title>
+    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DogForum.styles.css" asp-append-version="true" />
@@ -31,9 +31,10 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Discussions" asp-action="Create">New discussion</a>
                         </li>
                         <li class="nav-item ms-auto">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Discussions" asp-action="Index">Edit Discussions</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Discussions" asp-action="Index">My Threads</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

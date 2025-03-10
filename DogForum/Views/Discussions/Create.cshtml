@@ -29,6 +29,8 @@
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
 
+            <input type="hidden" asp-for="UserId" />
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -41,5 +43,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

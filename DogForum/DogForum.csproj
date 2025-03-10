@@ -7,10 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\NewFolder1\**" />
+    <Compile Remove="wwwroot\profile_pictures - Copy\**" />
+    <Content Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="wwwroot\profile_pictures - Copy\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\profile_pictures - Copy\**" />
+    <None Remove="wwwroot\NewFolder1\**" />
+    <None Remove="wwwroot\profile_pictures - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Views\Home\CommentsPost.cshtml.cs" />
     <Compile Remove="Views\Home\Details.cshtml.cs" />
     <Compile Remove="Views\Home\DiscussionsDetails.cshtml.cs" />
     <Compile Remove="Views\Home\PostComment.cs" />
+    <Compile Remove="Views\Home\Profile.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,12 +32,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\profile_pictures\" />
   </ItemGroup>
 
 </Project>

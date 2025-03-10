@@ -1,54 +1,87 @@
 ﻿@model DogForum.Models.Discussions
 
 @{
-    // code block
     ViewData["Title"] = "Discussion Details";
 }
 
 <div style="margin-top: 5vh">
-    <h4 class="fw-bold">@Html.DisplayFor(model => model.Title)</h4>
-    <hr />
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            
+            <div class="d-flex align-items-center">
+                
+                <div class="me-3">
+                    <a asp-controller="Home" asp-action="Profile" asp-route-id="@Model.User.Id">
+                    <img src="~/profile_pictures/@(Model.User?.ImageFilename ?? "vecteezy_profile-icon-design-vector_5544718.jpg")"
+                         class="img-fluid rounded-circle" alt="Profile Image"
+                         style="width: 80px; height: 80px;">
+					</a>
+                </div>
 
-        @if(!string.IsNullOrEmpty(Model.ImageFilename)){
-        <div>
-            <img class="rounded mx-auto d-block" src="@Url.Content("/images/" + Model.ImageFilename)" alt="@Model.Title" />
-        </div>
-        }
-        
-    <dl class="row" style="margin-top: 5vh">
-        <div class="col-sm-10">
-        <p>
-            @Html.DisplayFor(model => model.Content)
-        </p>
-        
-        <p style="float: right; margin: 2vh" class="fw-bold">
-            @Html.DisplayFor(model => model.CreateDate)
-        </p>
-        </div>
-    </dl>
+     
+                <div>
+                    <a class="no-link-style" asp-controller="Home" asp-action="Profile" asp-route-id="@Model.User.Id">
+						
 
-    <div style="margin-top: 6vh">
-        <a asp-controller="Comments" asp-action="Create" asp-route-id="@Model?.DiscussionsId">
-            <button type="button" class="btn btn-primary">Comment</button>
-        </a>
-    </div>
+                    <p class="fw-bold mb-0">@Html.DisplayFor(model => model.User.Name)</p>
 
-    <div style="margin-top: 3vh; margin-bottom: 10vh">
-        @foreach (var comment in Model.Comments)
-        {
-
-            <div class="card mb-3 shadow-sm">
-                    <div class="col">
-                <div class="card-body">
-                        <p>@comment.Content</p>
-                        <p class="fw-bold" style="float: right">@comment.CreateDate</p>
+					</a>
                 </div>
             </div>
+
+          
+            <h4 class="fw-bold text-center mt-3">@Html.DisplayFor(model => model.Title)</h4>
+            <hr />
+
+         
+            @if (!string.IsNullOrEmpty(Model.ImageFilename))
+            {
+                <div class="mb-3">
+                    <img class="rounded mx-auto d-block" src="@Url.Content("/images/" + Model.ImageFilename)" alt="@Model.Title" />
+                </div>
+            }
+
+            <div class="card mb-3 shadow-sm" style="background-color: #f7f7f7!important; border-radius: 10px;">
+                <div class="card-body">
+                    <p>@Html.DisplayFor(model => model.Content)</p>
+                </div>
+            </div>
+
+         
+            <p class="fw-bold text-end" style="margin: 2vh">@Html.DisplayFor(model => model.CreateDate)</p>
+        </div>
+    </div>
+
+    
+    <div class="mt-4 mb-5">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="card mb-3 shadow-sm">
+                <div class="col">
+                    <div class="card-body d-flex flex-column" style="height: 150px;">
+                       
+                        <p>@comment.Content</p>
+
+                       
+                        <div class="d-flex justify-content-between mt-auto">
+                            
+                            <p class="fw-bold">@comment.User.Name</p>
+                           
+                            <p class="fw-bold">@comment.CreateDate</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
     </div>
 </div>
-<div> 
-    <a asp-action="Index">Home Page</a>
+
+<div class="mt-4">
+    <a asp-controller="Comments" asp-action="Create" asp-route-id="@Model?.DiscussionsId">
+        <button style="float: right" type="button" class="btn btn-primary">Comment</button>
+    </a>
 </div>
 
+<div>
+    <a asp-action="Index">Home Page</a>
+</div>

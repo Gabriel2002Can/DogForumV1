@@ -17,7 +17,14 @@ html {
   min-height: 100%;
 }
 
+.card-body .no-link-style {
+    color: #000000 !important;
+    text-decoration: none !important;
+}
 
+.navbar-bg {
+    background: linear-gradient(135deg, #1e3c72, #2a5298); 
+}
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
@@ -71,9 +78,6 @@ header::before {
     background-size: cover;
     background-position: center 35%; 
     border-radius:3px
-}
-.navbar-bg {
-    background-color: rgba(0, 0, 0, 0.4); 
 }
 
 .discussionCreating{

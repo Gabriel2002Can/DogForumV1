@@ -20,8 +20,42 @@ namespace DogForum.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var discussions = await _context.Discussions.Include(d => d.Comments).OrderByDescending(d => d.CreateDate).ToListAsync();
+            var discussions = await _context.Discussions.Include(d => d.User).Include(d => d.Comments).OrderByDescending(d => d.CreateDate).ToListAsync();
+
+            
             return View(discussions);
+        }
+
+        public async Task<IActionResult> Profile(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            //Reference https://stackoverflow.com/questions/59647805/setting-viewmodel-properties-from-model-class
+
+            var discussions = await _context.Discussions
+            .Include(d => d.User)
+            .Where(d => d.UserId == user.Id)
+            .ToListAsync();
+
+            var profileViewModel = new ProfileViewModel
+            {
+                User = user,
+                Discussions = discussions
+            };
+
+            return View(profileViewModel);
+
         }
 
         public async Task<IActionResult> DiscussionsDetails(int? id)
@@ -32,7 +66,7 @@ namespace DogForum.Controllers
             }
 
             // get discussions by id
-            var discussions = await _context.Discussions.Include(m => m.Comments.OrderByDescending(d => d.CreateDate)).FirstOrDefaultAsync(m => m.DiscussionsId == id);
+            var discussions = await _context.Discussions.Include(d => d.User).Include(m => m.Comments).FirstOrDefaultAsync(m => m.DiscussionsId == id);
 
             if (discussions == null)
             {

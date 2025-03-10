@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DogForum.Data;
 
 namespace DogForum.Models
 {
@@ -18,6 +19,11 @@ namespace DogForum.Models
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
         public List<Comments>? Comments { get; set; }
+
+        public string UserId { get; set; } = string.Empty;
+
+        [ForeignKey("UserId")]
+        public ApplicationUser? User { get; set; }
 
         [NotMapped]
         [Display(Name = "Image")]
