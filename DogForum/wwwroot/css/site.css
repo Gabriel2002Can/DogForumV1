@@ -17,8 +17,16 @@ html {
   min-height: 100%;
 }
 
+.registration_margin{
+    margin-bottom: 1vh;
+}
+
 .card-body .no-link-style {
     color: #000000 !important;
+    text-decoration: none !important;
+}
+
+.no-link-style {
     text-decoration: none !important;
 }
 

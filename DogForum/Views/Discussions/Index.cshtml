@@ -4,10 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>My Threads</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <button type="button" class="btn btn-primary">
+        <a style="color: white" class="no-link-style" asp-action="Create">Create New</a>
+    </button>
 </p>
 <table class="table">
     <thead>
@@ -25,15 +27,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                    <a asp-action="DiscussionsDetails" asp-controller="Home" asp-route-id="@item.DiscussionsId">@Html.DisplayFor(modelItem => item.Title)</a>
             </td>
             <td>
                  @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DiscussionsId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DiscussionsId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DiscussionsId">Delete</a>
+                    <button type="button" class="btn btn-primary"><a style="color: white" class="no-link-style" asp-action="Edit" asp-route-id="@item.DiscussionsId">Edit</a></button>
+                    <button type="button" class="btn btn-primary"><a style="color: white" class="no-link-style" asp-action="Details" asp-route-id="@item.DiscussionsId">Details</a></button>
+                    <button type="button" class="btn btn-danger"><a style="color: white" class="no-link-style" asp-action="Delete" asp-route-id="@item.DiscussionsId">Delete</a></button>
+                
             </td>
         </tr>
 }

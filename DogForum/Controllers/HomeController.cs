@@ -46,6 +46,7 @@ namespace DogForum.Controllers
             var discussions = await _context.Discussions
             .Include(d => d.User)
             .Where(d => d.UserId == user.Id)
+            .OrderByDescending(d => d.CreateDate)
             .ToListAsync();
 
             var profileViewModel = new ProfileViewModel
@@ -66,7 +67,7 @@ namespace DogForum.Controllers
             }
 
             // get discussions by id
-            var discussions = await _context.Discussions.Include(d => d.User).Include(m => m.Comments).FirstOrDefaultAsync(m => m.DiscussionsId == id);
+            var discussions = await _context.Discussions.Include(d => d.User).Include(m => m.Comments).ThenInclude(c => c.User).FirstOrDefaultAsync(m => m.DiscussionsId == id);
 
             if (discussions == null)
             {

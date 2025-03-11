@@ -64,8 +64,10 @@
 
                        
                         <div class="d-flex justify-content-between mt-auto">
-                            
+
+                            <a class="no-link-style" asp-controller="Home" asp-action="Profile" asp-route-id="@comment.User.Id">
                             <p class="fw-bold">@comment.User.Name</p>
+                            </a>
                            
                             <p class="fw-bold">@comment.CreateDate</p>
                         </div>
@@ -83,5 +85,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Home Page</a>
+    <button type="button" class="btn btn-secondary"><a class="text-white no-link-style" asp-action="Index">Home Page</a></button>
+    
 </div>

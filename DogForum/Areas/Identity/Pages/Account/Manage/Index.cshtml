@@ -15,15 +15,15 @@
                 <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
                 <label asp-for="Username" class="form-label"></label>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Name" class="form-control" />
                 <label asp-for="Input.Name" class="form-label"></label>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Loc" class="form-control" />
                 <label asp-for="Input.Loc" class="form-label"></label>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 mb-3">
                 <label asp-for="Input.ImageFile" class="form-label">Upload Profile Picture</label>
                 <input type="file" asp-for="Input.ImageFile" class="form-control" />
                 <span asp-validation-for="Input.ImageFile" class="text-danger"></span>

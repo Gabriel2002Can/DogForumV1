@@ -57,6 +57,11 @@ namespace DogForum.Controllers
         {
 
             comments.UserId = _userManager.GetUserId(User) ?? throw new InvalidOperationException("User ID cannot be null");
+            
+            if (string.IsNullOrEmpty(comments.UserId))
+            {
+                return Unauthorized(); 
+            }
 
             if (ModelState.IsValid)
             {
@@ -64,6 +69,7 @@ namespace DogForum.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("DiscussionsDetails", "Home", new { id = comments.DiscussionsId });
             }
+
             ViewData["DiscussionsId"] = new SelectList(_context.Discussions, "DiscussionsId", "Title", comments.DiscussionsId);
             return View(comments);
         }
